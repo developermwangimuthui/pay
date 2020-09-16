@@ -213,9 +213,7 @@ class OrdersController extends Controller
             $data['status'] = $status[0]->orders_status_name;
 
             $email = $orders[0]->email;
-            $emailmessage = 'Dear ' . $orders[0]->customers_name . ',<br>Your Order has been processed successfully. Your order status is now marked as ' . $status[0]->orders_status_name . '.<br> <br> <p style="text-align:center;">We sent this email to ' . $orders[0]->customers_name . '<br>
-            Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
-            54 Beedstrasse, Düsseldorf, 40468, Germany</p>';
+            $emailmessage = 'Dear ' . $orders[0]->customers_name . ',<br>Your Order has been processed successfully. Your order status is now marked as ' . $status[0]->orders_status_name . '.<br> <br> ';
             $emailsubject = 'Product/Service Status';
             $client_name = $orders[0]->customers_name;
             // dd($client_name);

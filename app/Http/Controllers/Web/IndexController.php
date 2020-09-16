@@ -338,7 +338,7 @@ class IndexController extends Controller
 
 		$email = session('data')->email_address;
 		$emailmessage  = 'Dear ' . session('data')->first_name . ' ' . session('data')->last_name . ',<br>You Order has been Placed but you have not paid your amount you are just one step to pay your amount. <br> <br> <p style="text-align:center;">We sent this email to ' . session('data')->first_name . '<br>
-		Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved. 
+		Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 		54 Beedstrasse, Düsseldorf, 40468, Germany</p>';
 		$emailsubject = 'Product/Service Status';
 
@@ -482,20 +482,18 @@ class IndexController extends Controller
 			);
 		}
 		$email = session('data')->email_address;
-		$emailmessage  = 'Dear ' . session('data')->first_name . ' ' . session('data')->last_name . ',<br>You have successfully paid ' . session('data')->currency_type . session('data')->enter_amount . ' We will let you know about your status on ' . session('data')->email_address . ' soon.<br> <br> <p style="text-align:center;">We sent this email to ' . session('data')->first_name . '<br>
-		Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved. 
-		54 Beedstrasse, Düsseldorf, 40468, Germany</p>';
+		$emailmessage  = 'Dear ' . session('data')->first_name . ' ' . session('data')->last_name . ',<br>You have successfully paid ' . session('data')->currency_type . session('data')->enter_amount . ' We will let you know about your status on ' . session('data')->email_address . ' soon.<br> <br>';
 		$emailsubject = 'Product/Service Status';
 		$client_name = session('data')->first_name . ' ' . session('data')->last_name ;
 
-	
-     
-       
+
+
+
 
 		$myVar = new AlertController();
 		$mail = $myVar->sendEmail($email, $emailmessage, $emailsubject,$client_name);
-		
-		
+
+
 		return view('front.success', ['data' => session('data')]);
 	}
 
