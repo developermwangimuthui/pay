@@ -1,16 +1,15 @@
-@extends('admin.layout')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>{{ trans('labels.Edit') }} {{$result['method_detail'][1]['name']}}<small>{{ trans('labels.Edit') }} {{$result['method_detail'][1]['name']}}...</small> </h1>
+        <h1><?php echo e(trans('labels.Edit')); ?> <?php echo e($result['method_detail'][1]['name']); ?><small><?php echo e(trans('labels.Edit')); ?> <?php echo e($result['method_detail'][1]['name']); ?>...</small> </h1>
         <ol class="breadcrumb">
-            <li><a href="{{ URL::to('admin/dashboard/this_month')}}"><i class="fa fa-dashboard"></i>
-                    {{ trans('labels.breadcrumb_dashboard') }}</a></li>
-            <li><a href="{{ URL::to('admin/paymentmethods/index')}}"><i class="fa fa-dashboard"></i>
-                    {{ trans('labels.PaymentSetting') }}</a></li>
-            <li class="active">{{ trans('labels.Edit') }} {{$result['method_detail'][1]['name']}}</li>
+            <li><a href="<?php echo e(URL::to('admin/dashboard/this_month')); ?>"><i class="fa fa-dashboard"></i>
+                    <?php echo e(trans('labels.breadcrumb_dashboard')); ?></a></li>
+            <li><a href="<?php echo e(URL::to('admin/paymentmethods/index')); ?>"><i class="fa fa-dashboard"></i>
+                    <?php echo e(trans('labels.PaymentSetting')); ?></a></li>
+            <li class="active"><?php echo e(trans('labels.Edit')); ?> <?php echo e($result['method_detail'][1]['name']); ?></li>
         </ol>
     </section>
 
@@ -25,22 +24,23 @@
 
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">{{ trans('labels.Edit') }} {{$result['method_detail'][1]['name']}}</h3>
+                        <h3 class="box-title"><?php echo e(trans('labels.Edit')); ?> <?php echo e($result['method_detail'][1]['name']); ?></h3>
                     </div>
 
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                @if (count($errors) > 0)
-                                @if($errors->any())
+                                <?php if(count($errors) > 0): ?>
+                                <?php if($errors->any()): ?>
                                 <div class="alert alert-success alert-dismissible" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                    {{$errors->first()}}
+                                    <?php echo e($errors->first()); ?>
+
                                 </div>
-                                @endif
-                                @endif
+                                <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="row">
@@ -49,32 +49,35 @@
                                     <!-- form start -->
                                     <div class="box-body">
                                         <form enctype="multipart/form-data" class='form-validate'
-                                            action="{{ URL::to('admin/paymentmethods/update')}}" method="post">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="id" value="{{$id}}">
+                                            action="<?php echo e(URL::to('admin/paymentmethods/update')); ?>" method="post">
+                                            <?php echo e(csrf_field()); ?>
+
+                                            <input type="hidden" name="id" value="<?php echo e($id); ?>">
                                             <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="form-group">
                                                     <label for="shippingEnvironment"
                                                         class="col-sm-2 col-md-2 control-label"
-                                                        style="">{{ trans('labels.Enviroment') }}</label>
+                                                        style=""><?php echo e(trans('labels.Enviroment')); ?></label>
                                                     <div class="col-sm-10 col-md-4">
 
                                                         <label class=" control-label">
                                                             <input type="radio" name="enviroment" value="0"
                                                                 class="flat-red"
                                                                    <?php if($enviroment==0){echo 'checked' ;}else{echo '';}  ?>
-                                                            > &nbsp;{{ trans('labels.Sanbox') }}
+                                                            > &nbsp;<?php echo e(trans('labels.Sanbox')); ?>
+
                                                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                                         <label class=" control-label">
                                                             <input type="radio" name="enviroment" value="1"
                                                                 class="flat-red"
                                                             <?php if($enviroment==1){echo 'checked' ;}else{echo '';} ?>
-                                                             > &nbsp;{{ trans('labels.Live') }}
+                                                             > &nbsp;<?php echo e(trans('labels.Live')); ?>
+
                                                         </label>
                                                         <span class="help-block"
-                                                            style="font-weight: normal;font-size: 11px;margin-bottom: 0; display: none">{{ trans('labels.BraintreeAccountTypeText') }}</span>
+                                                            style="font-weight: normal;font-size: 11px;margin-bottom: 0; display: none"><?php echo e(trans('labels.BraintreeAccountTypeText')); ?></span>
                                                         <br>
                                                     </div>
                                                 </div>
@@ -84,58 +87,61 @@
                                             </div>
 
                                             <div class="row">
-                                                @foreach($result['method_keys'] as $res)
+                                                <?php $__currentLoopData = $result['method_keys']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $res): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                                                @if($res->keyname != 'paymentcurrency')
+                                                <?php if($res->keyname != 'paymentcurrency'): ?>
                                                 <div class="col-xs-6" style="margin-bottom: 10px;">
                                                     <div class="form-group">
                                                         <label for="name"
-                                                            class="col-sm-2 col-md-4 control-label">{{ trans('labels.'.$res->keyname) }}</label>
+                                                            class="col-sm-2 col-md-4 control-label"><?php echo e(trans('labels.'.$res->keyname)); ?></label>
                                                         <div class="col-sm-10 col-md-8">
                                                             <input type="text" name="<?php echo 'field_' .$res->key; ?>"
-                                                                id="braintree_merchant_id" value="{{$res->value}}"
+                                                                id="braintree_merchant_id" value="<?php echo e($res->value); ?>"
                                                                 class="form-control field-validate">
                                                             <span class="help-block"
-                                                                style="font-weight: normal;font-size: 11px;margin-bottom: 0; display: none">{{ trans('labels.MerchantIDText') }}</span>
+                                                                style="font-weight: normal;font-size: 11px;margin-bottom: 0; display: none"><?php echo e(trans('labels.MerchantIDText')); ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endif
-                                                @endforeach
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
 
                                             <hr>
-                                            <h4>{{ trans('labels.Translation') }}</h4>
+                                            <h4><?php echo e(trans('labels.Translation')); ?></h4>
                                             <hr>
                                             <div class="row">
-                                                @foreach($result['method_detail'] as $detail)
+                                                <?php $__currentLoopData = $result['method_detail']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $detail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
                                                         <label for="name"
-                                                            class="col-sm-2 col-md-4 control-label">{{ trans('labels.Name') }}
-                                                            ({{ $detail['language_name'] }}) </label>
+                                                            class="col-sm-2 col-md-4 control-label"><?php echo e(trans('labels.Name')); ?>
+
+                                                            (<?php echo e($detail['language_name']); ?>) </label>
                                                             <div class="col-sm-10 col-md-8">
                                                             <input type="text" name="name_<?=$detail['languages_id']?>"
                                                                 class="form-control field-validate"
-                                                                value="{{$detail['name']}}">
+                                                                value="<?php echo e($detail['name']); ?>">
                                                             <span class="help-block"
-                                                                style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.paymentmethodname') }}
-                                                                ({{ $detail['language_name'] }})</span>
+                                                                style="font-weight: normal;font-size: 11px;margin-bottom: 0;"><?php echo e(trans('labels.paymentmethodname')); ?>
+
+                                                                (<?php echo e($detail['language_name']); ?>)</span>
                                                             <span
-                                                                class="help-block hidden" style="display: none">{{ trans('labels.textRequiredFieldMessage') }}</span>
+                                                                class="help-block hidden" style="display: none"><?php echo e(trans('labels.textRequiredFieldMessage')); ?></span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endforeach
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </div>
                                             <!-- /.box-body -->
                                             <div class="row">
                                                 <div class="box-footer text-center">
                                                     <button type="submit"
-                                                        class="btn btn-primary payment-checkbox">{{ trans('labels.Submit') }}
+                                                        class="btn btn-primary payment-checkbox"><?php echo e(trans('labels.Submit')); ?>
+
                                                     </button>
-                                                    <a href="{{ URL::to('admin/paymentmethods/index')}}" type="button"
-                                                        class="btn btn-default">{{ trans('labels.back') }}</a>
+                                                    <a href="<?php echo e(URL::to('admin/paymentmethods/index')); ?>" type="button"
+                                                        class="btn btn-default"><?php echo e(trans('labels.back')); ?></a>
                                                 </div>
                                             </div>
                                         </form>
@@ -162,4 +168,6 @@
     </section>
     <!-- /.content -->
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Php\intpayergrationpal-master\resources\views/admin/paymentmethods/display.blade.php ENDPATH**/ ?>

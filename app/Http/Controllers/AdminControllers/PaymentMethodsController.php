@@ -30,14 +30,14 @@ class PaymentMethodsController extends Controller
     public function display($id){
         $title = array('pageTitle' => Lang::get("labels.PaymentSetting"));
         $result = $this->Payments_setting->display($id);
-        return view("admin.paymentmethods.display", $title)->with(['result' => $result,'id'=> $id]);
+        $enviroment = DB::table('payment_methods')->where('payment_methods_id',$id)->pluck('environment')->first();
+        return view("admin.paymentmethods.display", $title)->with(['result' => $result,'id'=> $id,'enviroment'=>$enviroment]);
     }
 
     public function update(Request $request){
         /*echo '<pre>';
         echo print_r($request);exit;*/
          $env = $_REQUEST['enviroment'];
-
       $this->Payments_setting->updaterecord($request,$env);
       $message = Lang::get("labels.InformationUpdatedMessage");
       return redirect()->back()->withErrors([$message]);

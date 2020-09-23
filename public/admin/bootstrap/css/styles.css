@@ -11,7 +11,7 @@
 	text-align: center;
 }
 table tr td{
-	text-transform: capitalize;
+	text-transform: unset;
 }
 .stat-ancher, .stat-ancher:hover, .stat-ancher:focus, .stat-ancher:active{
 	color: inherit;

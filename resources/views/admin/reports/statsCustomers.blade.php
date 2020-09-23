@@ -39,7 +39,6 @@
                       <th>{{ trans('labels.No') }}.</th>
                       <th>{{ trans('labels.CustomerName') }}</th>
                       <th>{{ trans('labels.TotalPurchased') }}</th>
-                      <th>{{ trans('labels.View') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -49,7 +48,6 @@
                             <td>{{ ++$key }}</td>
                             <td>{{ $orderData->firstname }} {{ $orderData->lastname }}</td>
                             <td>{{ $result['currency'][19]->value }}{{ $orderData->price }}</td>
-                            <td><a href="{{ URL::to('admin/editcustomers')}}/{{$orderData->customers_id}}" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                         </tr>
                     @endforeach
                   @else

@@ -87,8 +87,8 @@
                                         <tr>
                                             <td>{{ $listingCustomers->id }}</td>
                                             <td>{{ $listingCustomers->first_name }} {{ $listingCustomers->last_name }}</td>
-                                            <td>{{ $listingCustomers->email }}</td>
-                                            <td>                                               
+                                            <td class="email">{{ $listingCustomers->email }}</td>
+                                            <td>
                                                 <strong>{{ trans('labels.Phone') }}: </strong> {{ $listingCustomers->phone }} <br>
                                                 <strong>{{ trans('labels.Devices') }}: </strong>
                                                 @if(count($listingCustomers->devices)>0)

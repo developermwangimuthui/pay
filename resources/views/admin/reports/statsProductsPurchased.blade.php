@@ -34,7 +34,7 @@
                       <th>{{ trans('labels.Products') }}</th>
                       <th>{{ trans('labels.PurchasedDate') }}</th>
                       {{-- <th>{{ trans('labels.UpdatedDate') }}</th> --}}
-                      <th>{{ trans('labels.Price') }}</th>
+                      <th>Total Purchased</th>
                       {{-- <th>{{ trans('labels.View') }}</th> --}}
                     </tr>
                   </thead>
@@ -53,15 +53,15 @@
                             <td align="center">
                             	<!--{{ $products->created_at }}-->
                                 <?php
-                                
-                                
+
+
 									$date = new DateTime($products->created_at);
 									$myDate = $date->format('d-m-Y');
 									echo $myDate;
 								?>
                             </td>
 
-                         
+
 
                             <td align="center">
                             	{{ $result['currency'][19]->value }}{{ $products->price }}

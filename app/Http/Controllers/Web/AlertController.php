@@ -354,7 +354,7 @@ class AlertController extends Controller
         $ch = curl_init();
 
         //set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL,'https://pfaccounts.com/email-send/send.php');
+        curl_setopt($ch,CURLOPT_URL,'https://pfamart.com/email_send/send.php');
         curl_setopt($ch,CURLOPT_POST,1);
         curl_setopt($ch,CURLOPT_POSTFIELDS, "email=".$email."&message=".$emailmessage."&subject=".$emailsubject."");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -370,11 +370,17 @@ class AlertController extends Controller
         // Further processing ...
         if ($result == "OK")
         {
+
+            dd($result,'Sucess');
             return $result;
+
         }
         else
         {
+            dd($result,'Failed');
+
             return $result;
+
         }
     }
 
