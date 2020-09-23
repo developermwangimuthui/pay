@@ -531,7 +531,7 @@ final class Image extends AbstractImage
     private function saveOrOutput($format, array $options, $filename = null)
     {
         $format = $this->normalizeFormat($format);
-        //print($format);
+
         if (!$this->supported($format)) {
             throw new InvalidArgumentException(sprintf('Saving image in "%s" format is not supported, please use one of the following extensions: "%s"', $format, implode('", "', $this->supported())));
         }
@@ -724,7 +724,6 @@ final class Image extends AbstractImage
 
         static $mimeTypes = array(
             'jpeg' => 'image/jpeg',
-            'jpg'  => 'image/jpg',
             'gif'  => 'image/gif',
             'png'  => 'image/png',
             'wbmp' => 'image/vnd.wap.wbmp',

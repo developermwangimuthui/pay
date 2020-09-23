@@ -45,10 +45,10 @@ body {-webkit-print-color-adjust: exact;}
 
             </div>
             <div class="col-xs-4">
-                
+
             </div>
             <div class="col-xs-4">
-            
+
                 <small class="">
                     <b>Premium Freelancing Accounts</b><br>
                     Beedstrasse 54 40468 Dusseldorf Germany
@@ -68,13 +68,13 @@ body {-webkit-print-color-adjust: exact;}
             {{ $data['orders_data'][0]->customers_city }}, {{ $data['orders_data'][0]->customers_state }} {{ $data['orders_data'][0]->customers_postcode }}, {{ $data['orders_data'][0]->customers_country }}<br>
             {{ trans('labels.Phone') }}: &nbsp;{{ $data['orders_data'][0]->customers_telephone }}<br>-->
             {{ trans('labels.Email') }}:{{ $data['orders_data'][0]->email }}<br><br>
-            
+
 
 
           </address>
-          
-            
-          
+
+
+
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
@@ -102,7 +102,7 @@ body {-webkit-print-color-adjust: exact;}
             <small class="">{{ trans('labels.OrderedDate') }}:&nbsp;&nbsp;&nbsp;&nbsp; {{ date('m/d/Y', strtotime($data['orders_data'][0]->date_purchased)) }}</small>
             <br>
             {{ trans('labels.PaymentMethods') }}:&nbsp;&nbsp;&nbsp;&nbsp;{{ str_replace('_',' ', $data['orders_data'][0]->payment_method) }}
-          
+
         </div>
         <!-- /.col -->
       </div>
@@ -123,14 +123,14 @@ body {-webkit-print-color-adjust: exact;}
             </tr>
             </thead>
             <tbody>
-                
+
                 <tr>
                   <td  width="30%">
                     {{  $data['prod_des']->products_name }}<br>
                 </td>
                 <td>{{  $data['prod_des']->products_quantity }}</td>
-                
-              
+
+
                 <td></td>
                 <td></td>
                 <td></td>
@@ -180,7 +180,7 @@ body {-webkit-print-color-adjust: exact;}
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-7">
-          
+
           {{--@if(!empty($data['orders_data'][0]->coupon_code))
               <p class="lead" style="margin-bottom:10px">{{ trans('labels.Coupons') }}:</p>
                 <table class="text-muted well well-sm no-shadow stripe-border table table-striped" style="text-align: center; ">
@@ -200,8 +200,8 @@ body {-webkit-print-color-adjust: exact;}
 
           <div class="table-responsive ">
             <table class="table order-table">
-              
-              
+
+
               <tr style="outline: thin solid grey;">
                 <th style="width:50%">{{ trans('labels.Subtotal') }}:</th>
                 <td>@if($data['orders_data'][0]->currency == 'USD')
@@ -228,7 +228,7 @@ body {-webkit-print-color-adjust: exact;}
                     @endif
                     {{ $data['orders_data'][0]->total_tax }}</td>
               </tr>
-             
+
               @if(!empty($data['orders_data'][0]->coupon_code))
               <tr style="outline: thin solid grey;">
                 <th>{{ trans('labels.DicountCoupon') }}:</th>
@@ -258,12 +258,12 @@ body {-webkit-print-color-adjust: exact;}
                     @endif
                     {{ $data['orders_data'][0]->order_price }}</td>
               </tr>
-              
+
             </table>
           </div>
 
         </div>
-        
+
 
         <!-- /.col -->
       </div>

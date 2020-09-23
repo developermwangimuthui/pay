@@ -43,7 +43,7 @@
             <i class="fa fa-globe"></i> <?php echo e(trans('labels.OrderID')); ?># <?php echo e($data['orders_data'][0]->orders_id); ?>
 
             <small style="display: inline-block"><?php echo e(trans('labels.OrderedDate')); ?>: <?php echo e(date('m/d/Y', strtotime($data['orders_data'][0]->date_purchased))); ?></small>
-            <a href="<?php echo e(URL::to('admin/orders/invoiceprint/'.$data['orders_data'][0]->orders_id)); ?>" target="_blank"  class="btn btn-default pull-right"><i class="fa fa-print"></i> <?php echo e(trans('labels.Print')); ?></a>
+            <a href="<?php echo e(URL::to('admin/orders/downloadPdf/'.$data['orders_data'][0]->orders_id)); ?>" target="_blank"  class="btn btn-default pull-right"><i class="fa fa-download"></i> Download</a>
           </h2>
         </div>
         <!-- /.col -->
@@ -84,15 +84,15 @@
             </tr>
             </thead>
             <tbody>
-                
+
                 <tr>
                 <td><?php echo e($data['prod_des']->products_quantity); ?></td>
-                
+
                 <td  width="30%">
                     <?php echo e($data['prod_des']->products_name); ?><br>
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
                 </td>
@@ -190,7 +190,7 @@
                     <?php endif; ?>
                     <?php echo e($data['orders_data'][0]->total_tax); ?></td>
               </tr>
-             
+
               <?php if(!empty($data['orders_data'][0]->coupon_code)): ?>
               <tr>
                 <th><?php echo e(trans('labels.DicountCoupon')); ?>:</th>

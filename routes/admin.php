@@ -365,6 +365,7 @@ Route::group(['prefix'=>'admin/orders','middleware' => 'auth','namespace' => 'Ad
   Route::post('/updateOrder', 'OrdersController@updateOrder')->middleware('edit_order');
   Route::post('/deleteOrder', 'OrdersController@deleteOrder')->middleware('edit_order');
   Route::get('/invoiceprint/{id}', 'OrdersController@invoiceprint')->middleware('view_order');
+  Route::get('/downloadPdf/{id}', 'OrdersController@downloadPdf')->middleware('view_order');
   Route::get('/orderstatus', 'SiteSettingController@orderstatus')->middleware('view_order');
   Route::get('/addorderstatus', 'SiteSettingController@addorderstatus')->middleware('edit_order');
   Route::post('/addNewOrderStatus', 'SiteSettingController@addNewOrderStatus')->middleware('edit_order');

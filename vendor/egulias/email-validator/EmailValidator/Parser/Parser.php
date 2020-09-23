@@ -143,8 +143,7 @@ abstract class Parser
     protected function escaped()
     {
         $previous = $this->lexer->getPrevious();
-// dd($previous);
-// return $this->lexer;
+
         if ($previous['type'] === EmailLexer::S_BACKSLASH
             &&
             $this->lexer->token['type'] !== EmailLexer::GENERIC

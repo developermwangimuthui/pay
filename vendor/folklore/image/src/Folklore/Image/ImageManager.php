@@ -59,7 +59,7 @@ class ImageManager extends Manager
             $width = null;
             $height = null;
         }
-
+        
         $config = $this->app['config'];
         $url_parameter = isset($options['url_parameter']) ? $options['url_parameter']:$config['image.url_parameter'];
         $url_parameter_separator = isset($options['url_parameter_separator']) ? $options['url_parameter_separator']:$config['image.url_parameter_separator'];
@@ -239,10 +239,10 @@ class ImageManager extends Manager
         ), $config);
 
         $serve = new ImageServe($this, $config);
-
+        
         return $serve->response($path);
     }
-
+    
     /**
      * Proxy an image
      *
@@ -261,7 +261,7 @@ class ImageManager extends Manager
             'write_image' => $this->app['config']['image.proxy_write_image'],
             'cache_filesystem' => $this->app['config']['image.proxy_cache_filesystem']
         ), $config);
-
+        
         $serve = new ImageProxy($this, $config);
         return $serve->response($path);
     }
@@ -315,29 +315,29 @@ class ImageManager extends Manager
         }
 
         if ($crop) {
-
+            
             $imageSize = $thumbnail->getSize()->scale($ratio);
             $thumbnail->resize($imageSize);
-
+            
             $x = max(0, round(($imageSize->getWidth() - $size->getWidth()) / 2));
             $y = max(0, round(($imageSize->getHeight() - $size->getHeight()) / 2));
-
+            
             $cropPositions = $this->getCropPositions($crop);
-
+            
             if ($cropPositions[0] === 'top') {
                 $y = 0;
             } elseif ($cropPositions[0] === 'bottom') {
                 $y = $imageSize->getHeight() - $size->getHeight();
             }
-
+            
             if ($cropPositions[1] === 'left') {
                 $x = 0;
             } elseif ($cropPositions[1] === 'right') {
                 $x = $imageSize->getWidth() - $size->getWidth();
             }
-
+            
             $point = new Point($x, $y);
-
+            
             $thumbnail->crop($point, $size);
         } else {
             if (!$imageSize->contains($size)) {
@@ -423,7 +423,7 @@ class ImageManager extends Manager
         $config = $this->app['config'];
         $parameter = !isset($parameter) ? $config['image.url_parameter']:$parameter;
         $parameter = preg_replace('/\\\{\s*options\s*\\\}/', '([0-9a-zA-Z\(\),\-/._]+?)?', preg_quote($parameter));
-
+        
         if(!$pattern)
         {
             $pattern = $config->get('image.pattern', '^(.*){parameters}\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$');
@@ -560,7 +560,7 @@ class ImageManager extends Manager
         if (is_file(realpath($path))) {
             return realpath($path);
         }
-
+        
         //Get directories
         $dirs = $this->app['config']['image.src_dirs'];
         if ($this->app['config']['image.write_path']) {
@@ -626,7 +626,7 @@ class ImageManager extends Manager
                 $images[] = $directory.'/'.$file;
             }
         }
-
+        
         // Return the list
         return $images;
     }
@@ -778,7 +778,7 @@ class ImageManager extends Manager
 
         return null;
     }
-
+    
     /**
      * Return crop positions from the crop parameter
      *
@@ -787,7 +787,7 @@ class ImageManager extends Manager
     protected function getCropPositions($crop)
     {
         $crop = $crop === true ? 'center':$crop;
-
+        
         $cropPositions = explode('_', $crop);
         if (sizeof($cropPositions) === 1) {
             if ($cropPositions[0] === 'top' || $cropPositions[0] === 'bottom' || $cropPositions[0] === 'center') {
@@ -796,7 +796,7 @@ class ImageManager extends Manager
                 array_unshift($cropPositions, 'center');
             }
         }
-
+        
         return $cropPositions;
     }
 

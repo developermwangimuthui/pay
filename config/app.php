@@ -189,6 +189,7 @@ return [
         'Folklore\Image\ImageServiceProvider',
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -243,7 +244,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => 'Folklore\Image\Facades\Image',
         'Zipper' => 'Chumper\Zipper\Zipper',
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
 
     ],

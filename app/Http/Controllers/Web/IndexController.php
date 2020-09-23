@@ -190,17 +190,11 @@ class IndexController extends Controller
         $payments = DB::table('payment_methods')->get();
         $id = 'id';
         $paypal_id = DB::table('payment_methods_detail')->where('key', '=', 'id')->pluck('value')->first();
-        // $paypal_id = $paypal_id[0]->value;
-        // dd($paypal_id);
-        /*foreach ($payments as $pay){
-            echo $pay['id'];
-        }
-        exit;*/
-        /*echo '<pre>';
-       echo print_r($paypal_id);exit;*/
+
+        $enviroment = DB::table('payment_methods')->where('payment_methods_id', '=', 3)->pluck('environment')->first();
 
 
-        if ($payments[0]->environment == 0) {
+        if ($enviroment == 0) {
             $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
         } else {
             $url = 'https://www.paypal.com/cgi-bin/webscr';
