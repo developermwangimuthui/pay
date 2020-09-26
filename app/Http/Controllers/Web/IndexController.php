@@ -186,13 +186,14 @@ class IndexController extends Controller
     public function paymentsgateway()
     {
 
-        $products = DB::table('products_description')->get();
+        $products = DB::table('products')->join('products_description','products.products_id','=','products_description.products_id')->groupBy('products.products_id')->get();
+
         $payments = DB::table('payment_methods')->get();
         $id = 'id';
         $paypal_id = DB::table('payment_methods_detail')->where('key', '=', 'id')->pluck('value')->first();
 
         $enviroment = DB::table('payment_methods')->where('payment_methods_id', '=', 3)->pluck('environment')->first();
-
+// dd($enviroment);
 
         if ($enviroment == 0) {
             $url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';

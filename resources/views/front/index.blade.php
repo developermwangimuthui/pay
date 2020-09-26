@@ -4,7 +4,7 @@
         background-color: #f5f7fa;
         font-family: PayPal-Sans-Big,Helvetica Neue,Arial,sans-serif;
     }
-    
+
     input, select{
         border-radius: 10px !important;
     }
@@ -12,10 +12,10 @@
         text-align: left;
         padding: 10px;
         background-color: #f5f7fa;
-        
+
         box-sizing: border-box;
-        
-        
+
+
         width: 100%;
         z-index: 99999;
     }
@@ -228,7 +228,7 @@
 <!DOCTYPE HTML>
 <html>
 <head><meta charset="euc-jp">
-	
+
 	<meta name="author" content="mubeenkhan" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="all" />
@@ -284,12 +284,13 @@
                 <select name="service-name-select" class="form-control" id="services" required="required" onchange="getNewVal(this);">
                     <option value="">Select Services</option>
 
-                    <?php 
-                    
+                    <?php
+
                     foreach($products as $prod){?>
-                    
+
                         <option value="<?=$prod->products_name?>"><?=$prod->products_name?></option>
-                    <?php } ?> 
+                     
+                    <?php } ?>
 
                     <!--<option value="voiceovers">Voiceovers</option>
                     <option value="writing Services">Writing Services</option>
@@ -298,10 +299,10 @@
                 </select>
                 <div class="form-worning sel">Please fill this field</div>
             </div>
-            <div class="form-group">
+            <div class="form-group otherServices">
                 <label for="email-address" id="service-name-input-label">Other Service Details</label>
                 <input type="text" id="service-name-input" name="service-name-input" class="form-control" placeholder="Other Service Detail" />
-                                    
+
 
                 <div class="form-worning pay">Please fill this field</div>
             </div>
@@ -391,8 +392,8 @@
                     <th class="amount">$400</th>
                 </tr>
                 <tr>
-                    
-                    
+
+
                     <th>Currency Type</th>
                     <th class="currency">USD</th>
                 </tr>
@@ -440,11 +441,11 @@
         var lastname        = jQuery( '#last-name' ).val();
         var emailaddress    = jQuery( '#email-address' ).val();
         var services        = jQuery( '#services' ).val();
-        
+
        /* if(services == 'others'){
             services  = jQuery( '#service-name-input' ).val();
         }*/
-        
+
         var otherservices   = jQuery( '#service-name-input' ).val();
         var amount          = jQuery( '#enter-amount' ).val();
         var currency        = jQuery( '#currency-type' ).val();
@@ -592,6 +593,8 @@
             //console.log( addZeroes(val) );
             $(this).val( addZeroes(val) );
         });
+        
+        $('.otherServices').hide();
     });
 
     function addZeroes(num) {
@@ -611,11 +614,15 @@
 
 
     function getNewVal(item) {
-        if(item.value == 'others'){
+        var others = item.value;
+        console.log(others);
+        if(others.match(/Others.*/) || others.match(/others.*/)){
+            $('.otherServices').show();
             $('#service-name-input').show();
             $('#service-name-input-label').show();
 
         }else{
+            $('.otherServices').hide();
             $('#service-name-input').hide();
             $('#service-name-input-label').hide();
         }

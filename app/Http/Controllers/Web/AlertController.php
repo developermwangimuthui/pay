@@ -371,13 +371,13 @@ class AlertController extends Controller
         if ($result == "OK")
         {
 
-            dd($result,'Sucess');
+            // dd($result,'Sucess');
             return $result;
 
         }
         else
         {
-            dd($result,'Failed');
+            // dd($result,'Failed');
 
             return $result;
 
