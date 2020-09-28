@@ -701,6 +701,7 @@ class ComposerStaticInita4e1f2cd916719a2be015b5b55434258
         'App\\Models\\Web\\Shipping' => __DIR__ . '/../..' . '/app/Models/Web/Shipping.php',
         'App\\Models\\Web\\WebSetting' => __DIR__ . '/../..' . '/app/Models/Web/WebSetting.php',
         'App\\OrderStatusHistory' => __DIR__ . '/../..' . '/app/OrderStatusHistory.php',
+        'App\\ProductOther' => __DIR__ . '/../..' . '/app/ProductOther.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

@@ -182,6 +182,7 @@ return array(
     'App\\Models\\Web\\Shipping' => $baseDir . '/app/Models/Web/Shipping.php',
     'App\\Models\\Web\\WebSetting' => $baseDir . '/app/Models/Web/WebSetting.php',
     'App\\OrderStatusHistory' => $baseDir . '/app/OrderStatusHistory.php',
+    'App\\ProductOther' => $baseDir . '/app/ProductOther.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
