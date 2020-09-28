@@ -68,3 +68,14 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 	Route::get('/getMonthlyCancelledOrdersCount', 'ChartController@getMonthlyCancelledOrdersCount')->name('getMonthlyCancelledOrdersCount');
 	Route::get('/getMonthlyReturnOrdersCount', 'ChartController@getMonthlyReturnOrdersCount')->name('getMonthlyReturnOrdersCount');
 	Route::get('/getMonthlyOrdersData', 'ChartController@getMonthlyOrdersData')->name('getMonthlyOrdersData');
+Route::get('/config-cache', function () {
+    $exitCode = Artisan::call('config:cache');
+    return 'Success';
+    // return what you want
+});
+Route::get('/cache-clear', function () {
+    $exitCode = Artisan::call('cache:clear');
+    return 'Success';
+    // return what you want
+});
+

@@ -374,11 +374,11 @@ class IndexController extends Controller
             if($product_id =='' || $product_id == null){
                 $product_id = DB::table('products_description')->where('products_name', 'like', '%' . 'others' . '%')->pluck('products_id')->first();
 
-                $product_other = new ProductOther();
-                $product_other->product_id = $product_id;
-                $product_other->user_id =$user_id;
-                $product_other->others_name = $product;
-                $product_other->save();
+//                $product_other = new ProductOther();
+//                $product_other->product_id = $product_id;
+//                $product_other->user_id =$user_id;
+//                $product_other->others_name = $product;
+//                $product_other->save();
             }
 
 
