@@ -154,7 +154,6 @@ class OrdersController extends Controller
         $products_des = DB::table('orders_products')->where('orders_id', $orders_id)->first();
         $ordersData['prod_des'] = $products_des;
 
-
         return view("admin.Orders.vieworder", $title)->with('data', $ordersData);
     }
 

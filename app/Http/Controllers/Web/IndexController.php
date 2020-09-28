@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\AdminControllers\SiteSettingController;
+use App\ProductOther;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Web\AlertController;
 use App\Models\Core\Payments_setting;
@@ -186,7 +187,7 @@ class IndexController extends Controller
     public function paymentsgateway()
     {
 
-        $products = DB::table('products')->join('products_description','products.products_id','=','products_description.products_id')->groupBy('products.products_id')->get();
+        $products = DB::table('products')->join('products_description', 'products.products_id', '=', 'products_description.products_id')->groupBy('products.products_id')->get();
 
         $payments = DB::table('payment_methods')->get();
         $id = 'id';
@@ -331,21 +332,22 @@ class IndexController extends Controller
 		Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 		54 Beedstrasse, Düsseldorf, 40468, Germany</p>';
         $emailsubject = 'Product/Service Status';
-
+        $client_name = session('data')->first_name . ' ' . session('data')->last_name;
 
         $myVar = new AlertController();
-        $mail = $myVar->sendEmail($email, $emailmessage, $emailsubject);
+        $mail = $myVar->sendEmail($email, $emailmessage, $emailsubject, $client_name);
 
         return view('front.cancel', ['data' => session('data')]);
     }
 
     public function success()
     {
+
         if (!empty(session('data'))) {
             $users = User::where('email', session('data')->email_address)->get();
             $product = session('data')->services;
-
             $product_id = DB::table('products_description')->where('products_name', 'like', '%' . $product . '%')->pluck('products_id')->first();
+
 
             # check if email is less than 1
             if (sizeof($users) < 1) {
@@ -367,6 +369,16 @@ class IndexController extends Controller
             } else {
                 $user_id = DB::table('users')->where('email', session('data')->email_address)->pluck('id')->first();
                 $customer_id = DB::table('customers')->where('user_id', $user_id)->pluck('customers_id')->first();
+            }
+
+            if($product_id =='' || $product_id == null){
+                $product_id = DB::table('products_description')->where('products_name', 'like', '%' . 'others' . '%')->pluck('products_id')->first();
+
+                $product_other = new ProductOther();
+                $product_other->product_id = $product_id;
+                $product_other->user_id =$user_id;
+                $product_other->others_name = $product;
+                $product_other->save();
             }
 
 
@@ -468,15 +480,18 @@ class IndexController extends Controller
                     'products_quantity' => 1,
                 ]
             );
+
+            $email = session('data')->email_address;
+            $emailmessage = 'Dear ' . session('data')->first_name . ' ' . session('data')->last_name . ',<br>You have successfully paid ' . session('data')->currency_type . session('data')->enter_amount . ' We will let you know about your status on ' . session('data')->email_address . ' soon.<br> <br>';
+            $emailsubject = 'Product/Service Status';
+            $client_name = session('data')->first_name . ' ' . session('data')->last_name;
+
+
+            $myVar = new AlertController();
+            $mail = $myVar->sendEmail($email, $emailmessage, $emailsubject, $client_name);
+        } else {
+
         }
-        $email = session('data')->email_address;
-        $emailmessage = 'Dear ' . session('data')->first_name . ' ' . session('data')->last_name . ',<br>You have successfully paid ' . session('data')->currency_type . session('data')->enter_amount . ' We will let you know about your status on ' . session('data')->email_address . ' soon.<br> <br>';
-        $emailsubject = 'Product/Service Status';
-        $client_name = session('data')->first_name . ' ' . session('data')->last_name;
-
-
-        $myVar = new AlertController();
-        $mail = $myVar->sendEmail($email, $emailmessage, $emailsubject, $client_name);
 
 
         return view('front.success', ['data' => session('data')]);

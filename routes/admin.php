@@ -339,7 +339,7 @@ Route::group(['prefix'=>'admin/coupons','middleware' => 'auth','namespace' => 'A
 });
 Route::group(['prefix'=>'admin/devices','middleware' => 'auth','namespace' => 'AdminControllers'], function () {
   Route::get('/display', 'NotificationController@devices')->middleware('view_notification');
-  Route::get('/viewdevices/{id}', 'NotificationController@viewdevices')->middleware('view_notification');
+  Route::get('/viewdevices/{id}', 'NotificatidashboardonController@viewdevices')->middleware('view_notification');
   Route::post('/notifyUser/', 'NotificationController@notifyUser')->middleware('edit_notification');
   Route::get('/notifications/', 'NotificationController@notifications')->middleware('view_notification');
   Route::post('/sendNotifications/', 'NotificationController@sendNotifications')->middleware('edit_notification');

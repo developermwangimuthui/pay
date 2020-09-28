@@ -40,7 +40,7 @@ class AdminController extends Controller
             return view("admin.forgotpassword",$title);
         }
     }
-    
+
     public function mail(Request $request){
         $emailmessage = "Dear Customer! \n Thank you for your order.!";
         $emailsubject = 'Test';
@@ -61,19 +61,19 @@ class AdminController extends Controller
         //check email exist
         $existUser = $this->ExistUser($email);
         if(count(array($existUser))>0){
-            
+
             $this->UpdateExistUser($email,$password);
-          
+
             $existUser->password = $password;
-            
+
             $email = $existUser->email;
             $emailmessage = '<img src="https://pfaccounts.com/wp-content/uploads/2019/10/pfa-2.png" alt="Premium Freelancing Accounts" id="logo"  width="250" height="100"><br><br>Dear, '.$existUser->first_name.' '.$existUser->last_name.', <br>Your New credentials are given:<br> username: '.$existUser->email.'<br> New Passowrd: '.$existUser->password.'<br>Please Use the above credentials to login the Pfaccounts Portal <br> <p style="text-align:center;">We sent this email to '.$existUser->first_name.'<br>
-Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved. 
+Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 54 Beedstrasse, Düsseldorf, 40468, Germany</p>';
             $emailsubject = 'Recover Password';
 
-			
-            
+
+
             $myVar = new AlertController();
             //$alertSetting = $myVar->forgotPasswordAlert($existUser);
             $mail = $myVar->sendEmail($email,$emailmessage,$emailsubject);
@@ -125,6 +125,7 @@ Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 		$index = 0;
 		$purchased_price = 0;
 		$sold_cost = 0;
+
 		foreach($orders as $orders_data){
 			$orders_products = DB::table('orders_products')
 				->select('final_price', DB::raw('SUM(final_price) as total_price') ,'products_id','products_quantity' )
@@ -154,6 +155,7 @@ Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 
 			}
 
+
 			$orders_status_history = DB::table('orders_status_history')
 				->LeftJoin('orders_status', 'orders_status.orders_status_id', '=', 'orders_status_history.orders_status_id')
 			->LeftJoin('orders_status_description', 'orders_status_description.orders_status_id', '=', 'orders_status.orders_status_id')
@@ -168,6 +170,7 @@ Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 			$index++;
 
   		}
+
 
   		//products profit
   		if($purchased_price==0){
@@ -282,7 +285,6 @@ Copyright © 2019-2020 Premium Freelancing Accounts All rights reserved.
 		$role =  DB::table('manage_role')
 		->where('user_types_id',Auth()->user()->role_id)
 		->first();
-
 
   		return view("admin.dashboard",$title)->with('result', $result)->with('role', $role);
 	}
